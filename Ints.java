@@ -8,5 +8,7 @@ public class Ints {
         int c = (a*2+2*a*b-4*(1+2))/2;
         
         System.out.println(c);
+
+        //-2 should be the output
     }
 }
