@@ -1,4 +1,4 @@
-# What should I put inn here lol?
+# ?
 
 
 how to run On android
@@ -22,3 +22,6 @@ how to run on Archlinux.
 sudo pacman --sync --refresh --sysupgrade --needed git jdk17-openjdk vim  # (-Syu --needed for short) you can use 8/18/13 if you want 
 ```
 2. You are using archlinux so you can do the rest lol
+
+
+Also visit: https://funami.tech/ one of my fav site hehehe
