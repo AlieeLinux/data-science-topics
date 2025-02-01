@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 class AverageGrade {
 
-    private static double TotalAverageGrade(int y) {
+    private static double TotalAverageGrade(double y) {
         double x = y / 8;
         return x;
     }
@@ -51,7 +51,7 @@ class AverageGrade {
             System.out.print("\nInsert your eight Grade\n>>");
             grade[7] = input.nextInt();
 
-            int Total = 0 + grade[0] + grade[1] + grade[2] + grade[3] + grade[4] + grade[5] + grade[6] + grade[7];
+            double Total = 0 + grade[0] + grade[1] + grade[2] + grade[3] + grade[4] + grade[5] + grade[6] + grade[7];
 
             
             double AverageGrade = TotalAverageGrade(Total);
