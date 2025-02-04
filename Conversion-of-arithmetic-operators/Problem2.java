@@ -1,19 +1,3 @@
-//1. Declares and initializes the following variables:
-//o int x = 40
-//o double y = 6.2
-//o float z = 14.7f
-//o long w = 20000L
-//2. Performs and prints the results of the following operations:
-//o Multiplication of x and y
-//o Division of w by z
-//o Addition of y and z
-//o Modulo operation between w and x
-//3. Demonstrates type conversion:
-//o Convert x to double implicitly
-//o Explicitly cast y to int
-//o Convert w to float using explicit casting
-
-
 class Problem2 {
     public static void main(String args[]) {
         // mag assign tayo ng variable
@@ -23,11 +7,13 @@ class Problem2 {
         long w = 20000L;
 
         //gawa tayo ng variable para sa Arithmetic operations
-        //at i convert naten sa double ganit ang Type Conversions para hindi magkaproblema 
+        //at i convert naten ang mga hindi supported na variable kagaya ng float gawin nateng
+        //double gamit ang Type Conversions para hindi magkaproblema.
         double XtimesY = x * y;
         double WdivideZ = (double) w / (double) z;
         double YplusZ = y + (double) z;
-        double WmoduloX = (double) w % x;
+        //ito ay magiging int according sa activity na sinend ni sir
+        int WmoduloX = (int) w % x;
 
         //i convert naten ang mga variables sa ibang type ng variable para mas mapadale
         //example. int to double
@@ -43,13 +29,10 @@ class Problem2 {
 
         //I print na naten ang mga Type Conversations:
         System.out.println("\nType Conversions: ");
-        System.out.println("int to double: " + x +" -> "+ xToDouble );
-        System.out.println("double to int: " + y +" -> "+ yToint);
-        System.out.println("long to float: " + w +" -> "+ wToFloat );
+        System.out.println("int to double (explicit): " + x +" -> "+ xToDouble );
+        System.out.println("double to int (explicit): " + y +" -> "+ yToint);
+        System.out.println("long to float (explicit): " + w +" -> "+ wToFloat );
 
-
-
-
-
+        //made with <3 gamit ang vim editor
     }
 }
