@@ -1,25 +1,22 @@
 package MeanMedianMode;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Mode {
     public static int ModeResult(int[] array) {
-        int mode = array[0];
-        int x, y, z;
-        x=1;
-        y=array[0];
-        z=1;
-
-        for (int i = 1; i < array.length; i++) {
-           if (array[i] == y) {
-               z++;
-           } else if (x > z) {
-               mode = z;
-           }
-           y = array[i];
-           z = 1;
+        Map<Integer, Integer> frequentvalue = new HashMap<>();
+        for ( int i = 0; i < array.length; i++ ) {
+            frequentvalue.put(array[i], frequentvalue.getOrDefault(array[i], 0) + 1);
         }
 
-        if (x > z) {
-            mode = y;
+        int mode = array[0]; //first entry of array
+        int Maxcount = 0;
+
+        for ( Map.Entry<Integer, Integer> entry :frequentvalue.entrySet() ) {
+            if ( entry.getValue() > Maxcount ) {
+                Maxcount = entry.getValue();
+                mode = entry.getKey();
+            }
         }
 
         return mode;

@@ -18,8 +18,18 @@ for loop i++ (
 
             mode = z
             or mode = 1
-
 }
+    y = array[i or 1] this will become y = 6
+    z = 1; self explanatory
+
+
+say if i becomes 2
+
 
 
 )
+
+
+
+
+
