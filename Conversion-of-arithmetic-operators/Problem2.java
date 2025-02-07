@@ -1,6 +1,10 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 class Problem2 { // gawa tayo ng class magkatugma sa filename kung gagamit ka ng public class
     public static void main(String args[]) { // main function ng java. kinakailangan ito
         // mag assign tayo ng variable galing sa activity
+
         int x = 40; 
         double y = 6.2;
         float z = 14.7f;
@@ -18,10 +22,19 @@ class Problem2 { // gawa tayo ng class magkatugma sa filename kung gagamit ka ng
         int yToint = (int) y; 
         float wToFloat = (float) w;
 
+        //round off that
+        BigDecimal Xy = new BigDecimal(XtimesY);
+        BigDecimal XyRounded = Xy.setScale(2, RoundingMode.UP);
+        //BigDecimal XyRounded = Xy.setScale(2, RoundingMode.UP);
+        BigDecimal Wz = new BigDecimal(WdivideZ);
+        BigDecimal WzRounded = Wz.setScale(2, RoundingMode.UP);
+        BigDecimal Yz = new BigDecimal(YplusZ);
+        BigDecimal YzRounded = Yz.setScale(2, RoundingMode.UP);
+
         System.out.println("Arithmetic Operations: ");  
-        System.out.println(x +" * "+ y +" = "+ XtimesY);
-        System.out.println(w +" / "+ z +" = "+ WdivideZ);
-        System.out.println(y +" + "+ z +" = "+ YplusZ);
+        System.out.println(x +" * "+ y +" = "+ XyRounded);
+        System.out.println(w +" / "+ z +" = "+ WzRounded);
+        System.out.println(y +" + "+ z +" = "+ YzRounded);
         System.out.println(w +" % "+ x +" = "+ WmoduloX);
 
         //I print na naten ang mga Type Conversations:
