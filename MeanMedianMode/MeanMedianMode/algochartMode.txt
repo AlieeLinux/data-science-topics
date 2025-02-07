@@ -1,0 +1,25 @@
+given array = 6, 6, 1, 1, 1, 3, 4, 6, 7, 9, 6
+
+
+Mode.java --> Main class --> mode = array[0] --> y array[0] --> x=1, z=1
+simple: mode = 6, y = 6
+
+
+for loop i++ (
+    if array[i(1)](6) == y[i(1)](6):
+    this will become {if 6 == 6} returns true{
+
+        z++
+        the z will become 2 so 2
+}
+
+        else if x > z:
+        simplified: else if 1 > 2 {
+
+            mode = z
+            or mode = 1
+
+}
+
+
+)
