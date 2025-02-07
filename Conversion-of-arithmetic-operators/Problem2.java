@@ -29,7 +29,7 @@ class Problem2 { // gawa tayo ng class magkatugma sa filename kung gagamit ka ng
         BigDecimal Wz = new BigDecimal(WdivideZ);
         BigDecimal WzRounded = Wz.setScale(2, RoundingMode.UP);
         BigDecimal Yz = new BigDecimal(YplusZ);
-        BigDecimal YzRounded = Yz.setScale(2, RoundingMode.UP);
+        BigDecimal YzRounded = Yz.setScale(1, RoundingMode.UP);
 
         System.out.println("Arithmetic Operations: ");  
         System.out.println(x +" * "+ y +" = "+ XyRounded);
