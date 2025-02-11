@@ -2,7 +2,7 @@
 
 import java.util.Scanner;
 
-public class AirFare {
+public class AirFareBackup {
     public static void main(String args[]) {
         double Fare, NetFare;
         int CustomerCode;
@@ -16,19 +16,30 @@ public class AirFare {
         System.out.println("\n");
 
         if ( CustomerCode == 1 ) {
+            System.out.println("Customer is Student");
             NetFare = Fare * 0.10;
-            System.out.println("Netfare for Student: " + NetFare);
+            System.out.println("Discount is "+ NetFare + " dollars\n");
+            System.out.println("NetFare is "+ (Fare - NetFare) + " dollars");
+            
+            //System.out.println("Netfare for Student: " + NetFare);
         }
         else if ( CustomerCode == 2 ) {
+            System.out.println("Customer is Senior");
             NetFare = Fare * 0.20;
-            System.out.println("Netfare for Senior: " + NetFare);
+            System.out.println("Discount is "+ NetFare + " dollars\n");
+            System.out.println("NetFare is "+ (Fare - NetFare) + " dollars");
+            //System.out.println("Netfare for Senior: " + NetFare);
         } else if ( CustomerCode == 0 ) {
+            System.out.println("Ordinary Customer");
             NetFare = Fare;
-            System.out.println("Netfare for Ordinary: " + NetFare);
+            System.out.println("No discount\n");
+            System.out.println("NetFare is "+ (Fare) + " dollars");
+            //System.out.println("Netfare for Ordinary: " + NetFare);
         }
         else {
             System.out.println("Invalid");
         }
+        System.out.println(); 
         Input.close();
         System.exit(0);
     }
