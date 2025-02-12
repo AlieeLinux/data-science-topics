@@ -72,20 +72,20 @@ def unGroupData(x, y):
     FtimesXminuxMeanXpow2 = np.empty(len(x))
 
     Fx = np.empty(len(x))
-    
+
     XMean = Data.sum() / len(Data)
 
-    Frequencyp = Frequency
+    Frequencyp = Frequency.copy()
     Frequencyp.sort()
 
     FrequencyMax = Frequencyp[len(Frequencyp)-1]
 
     N = Frequency.sum()
-    
+
     CellF = 0
 
     for i in range(len(Data)):
-    
+
 
         if FrequencyMax == Frequency[i]:
             CellF = i
@@ -109,11 +109,15 @@ def unGroupData(x, y):
 
     if CellF == 0:
         Cfb = 0
+        F1 = 0
+        F2 = 0
     else:
         Cfb = CumulativeFrequency[CellF-1]
+        F1 = Frequency[CellF-1]
+        F2 = Frequency[CellF+1]
 
     Fmedian = Frequency[CellF]
-    LBmedian = Midpoint[CellF]
+#    LBmedian = Midpoint[CellF]
 
 
     print("cummulative freq: ", CumulativeFrequency)
@@ -137,26 +141,35 @@ def unGroupData(x, y):
     Tables = fd.transpose()
     Tables.columns = ["Data", "Frequency", "CF", "RF", "MidPoint", "(X-Xm)", "(X-Xm)2", "f(x)", "f(X-Xm2)"]
     print(Tables)
-    #GraphOgive(Data, CumulativeFrequency)
+    GraphOgive(Data, CumulativeFrequency)
     GraphPolygram(Data, Frequency)
 
-    Mean = Fx.sum() / Frequency.sum()
+    MeanT = Frequency.copy()
 
-    print(FrequencyMax)
+    Mean = MeanT.sum() / 2 
 
-    Nd2 = Fx.sum() / 2
+    Nd2 = Frequency.sum() / 2
+    print(Fmedian)
+    print(F1)
+    print(F2)
 
-    Median = ((Nd2 - Cfb)/Fmedian)*1+Fmedian
+    Median = ((Nd2 - Cfb)/(Fmedian))*10+40.5
+    Mode = (Fmedian - F1)/(2*Fmedian-F2-F1)*10+40.5
 
-    print(Cfb)
-    print(Median)
+    print("Median: ", Median)
+    print("Mode: ", Mode)
 
     print("The Mean is: ", Mean)
     return CumulativeFrequency
-#x = np.array([1, 2, 3, 4, 5, 6, 7])
-#y = np.array([7, 6, 5, 4, 3, 2, 1])
 
-#GroupData(x, y )
+
+
+
+
+
+
+
+
 
 
 
