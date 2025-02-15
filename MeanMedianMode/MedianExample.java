@@ -20,6 +20,7 @@ class MedianExample {
         System.out.println(Meadian.Median(x));
         UserInput.close();
         } finally {
+            System.out.println("do nothing");
         }
     }
 }
