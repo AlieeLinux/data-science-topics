@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class AirFare {
     public static void main(String args[]) {
-        double Fare, NetFare;
+        double Fare=0.0, NetFare=0.0;
         int CustomerCode;
 
         Scanner Input = new Scanner(System.in);
