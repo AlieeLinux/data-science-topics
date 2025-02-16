@@ -53,6 +53,7 @@ def FrequencyUngroup(Data, DataLower, DataUpper, Range):
         DataLower,
         DataUpper
     ]
+    print(Return)
     return Return
 
 
@@ -63,19 +64,21 @@ def DataSplitter(data, ClassBound = 6):
     Min = data.min()
     Range = Max - Min
 
-    ClassWidth = int(round(Range / 7))
+    for p in range(int(ClassBound)):
+        LowerData[p]
+        HigherData[p]
+
+    ClassWidth = int(math.ceil(Range / 7))
 
     for i in range(int(ClassBound)):
         if i == 0:
             LowerData[i] +=1
             HigherData[i] +=ClassWidth-1
-            continue
-
-#        LowerData[i] = LowerData[i-1]
-#        HigherData[i] = HigherData[i-1]
-
-        LowerData[i] +=1
-        HigherData[i] +=ClassWidth-1
+        else:
+            LowerData[i] += LowerData[i-1]
+            HigherData[i] += HigherData[i-1]
+           # LowerData[i] +=1
+           # HigherData[i] +=ClassWidth-1
 
     print(LowerData, HigherData)
 

@@ -1,7 +1,7 @@
 import SimpletableTest
 
-Dataup = [1, 4, 6, 8]
-DataLo = [3, 5, 7, 9]
+Dataup = [1, 3, 5, 7]
+DataLo = [2, 4, 6, 8]
 Data = [1, 2, 3, 3, 3, 4, 5, 6, 7]
 Range = 4
 print(Data, "\n")
