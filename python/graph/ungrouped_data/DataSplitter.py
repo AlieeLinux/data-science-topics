@@ -3,12 +3,20 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
+
 def graph(x, y ):
     plt.scatter(x, y)
     plt.plot(x, y)
     plt.show()
 
+
+
+
 Example = np.array([3, 7, 3, 4, 5, 6, 8, 9, 10, 20])
+
+
+
 
 def DataSplitLower(Data, Classes):
     LD = np.empty(Classes)
@@ -132,6 +140,7 @@ def UngroupData(LD, HD, y):
     Tables = fd.transpose()
     Tables.columns = ["LData", "HData", "Frequency", "H", "L", "CF", "RF", "MidPoint", "(X-Xm)", "(X-Xm)2", "f(x)", "f(X-Xm2)"]
     print(Tables)
+    Tables.to_csv("Mycsv.csv")
 #    GraphOgive(Data, CumulativeFrequency)
 #    GraphPolygram(Data, Frequency)
 
