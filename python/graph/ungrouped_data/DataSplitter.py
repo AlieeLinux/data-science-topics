@@ -1,8 +1,9 @@
 import math
+#from os import CLD_STOPPED
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
+from random import randint
 
 
 def graph(x, y ):
@@ -11,41 +12,70 @@ def graph(x, y ):
     plt.show()
 
 
+#Generate a dummy data
+q = randint(300, 1000)
+
+ClasLen = q
+Example = np.empty(q)
+y = np.empty(q)
 
 
-Example = np.array([3, 7, 3, 4, 5, 6, 8, 9, 10, 20])
+
+for p in range(len(Example)):
+    Example[p] = randint(99, 2999)
+    y[p] = randint(1, 200)
+
+
+class Data:
+    #@staticmethod
+    def DataSplitLower(self, Data, Classes):
+        LD = np.empty(Classes)
+        HD = np.empty(Classes)
+        Range = Data.max() - Data.min()
+        CW = math.ceil(Range/Classes)
+        HDL = Example.min()
+
+        for i in range(Classes):
+            LD[i] = HDL
+            HD[i] = HDL + CW - 1
+            HDL = HD[i] + 1
+
+
+        return LD
+
+    def GetClass(self, Data, Classes):
+        LD = np.empty(Classes)
+        HD = np.empty(Classes)
+        Range = Data.max() - Data.min()
+        CW = math.ceil(Range/Classes)
+        HDL = Example.min()
+
+        for i in range(Classes):
+            LD[i] = HDL
+            HD[i] = HDL + CW - 1
+            HDL = HD[i] + 1
+
+
+        return Classes
 
 
 
 
-def DataSplitLower(Data, Classes):
-    LD = np.empty(Classes)
-    HD = np.empty(Classes)
-    Range = Data.max() - Data.min()
-    CW = math.ceil(Range/Classes)
-    HDL = Example.min()
 
-    for i in range(Classes):
-        LD[i] = HDL
-        HD[i] = HDL + CW - 1
-        HDL = HD[i] + 1
+    def DataSplitHigher(self, Data, Classes):
+        LD = np.empty(Classes)
+        HD = np.empty(Classes)
+        Range = Data.max() - Data.min()
+        CW = math.ceil(Range/Classes)
+        HDL = Example.min()
 
-    return LD
+        for i in range(Classes):
+            LD[i] = HDL
+            HD[i] = HDL + CW - 1
+            HDL = HD[i] + 1
 
+        return HD
 
-def DataSplitHigher(Data, Classes):
-    LD = np.empty(Classes)
-    HD = np.empty(Classes)
-    Range = Data.max() - Data.min()
-    CW = math.ceil(Range/Classes)
-    HDL = Example.min()
-
-    for i in range(Classes):
-        LD[i] = HDL
-        HD[i] = HDL + CW - 1
-        HDL = HD[i] + 1
-
-    return HD
 
 
 def UngroupData(LD, HD, y):
@@ -165,15 +195,12 @@ def UngroupData(LD, HD, y):
     return CumulativeFrequency
 
 
+data = Data()
 
+FreqLenght = data.GetClass(Example, ClasLen)
 
-
-LD = DataSplitLower(Example, 10)
-HD = DataSplitHigher(Example, 10)
-
-
-y = np.array([1 ,8, 9, 2, 5, 6, 7, 34, 1, 29])
-
+LD = data.DataSplitLower(Example, ClasLen)
+HD = data.DataSplitHigher(Example, ClasLen)
 
 
 UngroupData(LD, HD, y)
