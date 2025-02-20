@@ -23,5 +23,6 @@ sudo pacman --sync --refresh --sysupgrade --needed git jdk17-openjdk vim  # (-Sy
 ```
 2. You are using archlinux so you can do the rest lol
 
+Group 8;
 
 Also visit: https://funami.tech/ one of my fav site hehehe
