@@ -25,11 +25,12 @@ sudo pacman --sync --refresh --sysupgrade --needed git jdk17-openjdk vim  # (-Sy
 
 Group 8;
 
-<br>
+<p></p>
+
 # IF you are an DSA student. you can create a pull request anytime you want and I'll Approve it :D
 you can fork this repo and create a pull request
 
 
-<br>
+<p></p>
 
 Also visit: https://funami.tech/ one of my fav site hehehe
