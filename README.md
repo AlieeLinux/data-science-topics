@@ -1,4 +1,4 @@
-# Sir!! Pull request!!
+# EeEeEeEEEEeeeeEEEeEEEEEEEe
 
 
 how to run On android
@@ -24,5 +24,12 @@ sudo pacman --sync --refresh --sysupgrade --needed git jdk17-openjdk vim  # (-Sy
 2. You are using archlinux so you can do the rest lol
 
 Group 8;
+
+<br>
+# IF you are an DSA student. you can create a pull request anytime you want and I'll Approve it :D
+you can fork this repo and create a pull request
+
+
+<br>
 
 Also visit: https://funami.tech/ one of my fav site hehehe
