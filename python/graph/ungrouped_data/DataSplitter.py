@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from random import randint
-
+from statistics import mode
 
 def graph(x, y ):
     plt.scatter(x, y)
@@ -12,8 +12,12 @@ def graph(x, y ):
     plt.show()
 
 
+def pygraph(x):
+    plt.pie(x)
+    plt.show()
+
 #Generate a dummy data
-q = randint(300, 1000)
+q = randint(10, 20)
 
 ClasLen = q
 Example = np.empty(q)
@@ -22,7 +26,7 @@ y = np.empty(q)
 
 
 for p in range(len(Example)):
-    Example[p] = randint(99, 2999)
+    Example[p] = randint(3, 10000)
     y[p] = randint(1, 200)
 
 
@@ -170,6 +174,7 @@ def UngroupData(LD, HD, y):
     Tables = fd.transpose()
     Tables.columns = ["LData", "HData", "Frequency", "H", "L", "CF", "RF", "MidPoint", "(X-Xm)", "(X-Xm)2", "f(x)", "f(X-Xm2)"]
     print(Tables)
+    pygraph(RelativeFrequency)
     Tables.to_csv("Mycsv.csv")
 #    GraphOgive(Data, CumulativeFrequency)
 #    GraphPolygram(Data, Frequency)
