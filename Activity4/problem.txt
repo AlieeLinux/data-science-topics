@@ -1,0 +1,7 @@
+
+Activity 4
+
+construct a programs using any repetition structure that will perform the following
+
+1. it will display numbers 1-100
+2. it will only accept 5 numbers
