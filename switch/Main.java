@@ -21,8 +21,6 @@
 //one solution using if else statement
 //one solution using switch statement
 
-
-
 import java.util.Scanner;
 
 
@@ -35,7 +33,7 @@ class operations {
         return x - y;
     } 
     public static int product(int x, int y) {
-        return x + y;
+        return x * y;
     }
     public static int quotient(int x, int y) {
         return x / y;
@@ -43,7 +41,7 @@ class operations {
 }
 
 
-class Main {
+public class Main {
     public static void test() {
         Scanner sc = new Scanner(System.in);
         int num1, num2, choice, method;

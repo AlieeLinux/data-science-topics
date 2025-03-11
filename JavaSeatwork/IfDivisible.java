@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 class IfDivisible {
-    
+
     public static boolean IfDivisibleByFive(int x) {
         if (x % 5 == 0) {
             return true;

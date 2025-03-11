@@ -1,9 +1,10 @@
 public class AgeConf {
     public static void main(String args[]) {
-        int x = 0;
-        do {
-            System.out.println(x);
-            x++;
-        } while (9 > x);
-        }
+        for (int i = 0; i < 420; i++) {
+            System.out.println("Bryan's " + i + " Notes");
+            for (int j = 0; j < 3; j++) {
+                System.out.println("    I love Miners");
+            }
+        }       
     }
+}

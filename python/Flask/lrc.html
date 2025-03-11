@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://jtvjan.nl/tools/lrccreator.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta name="description" content="A simple LRC editor, usable in your browser. Make an LRC file in three easy steps.">
+		<meta name="viewport" content="width=device-width">
+		<title>LRC Creator</title>
+		<style>
+			section, #player {
+				display: none;
+			}
+
+			#player {
+				width: 100%;
+			}
+
+			.currentlyric:before {
+				content: '▶ ';
+			}
+
+			.currentlyric {
+				font-weight: bold;
+			}
+
+			#lyricscontainer {
+				border: 2px ridge;
+				padding: 1px 5px;
+			}
+
+			#lyricscontainer > div {
+				min-height: 1em;
+			}
+
+			label {
+				display: block;
+			}
+
+			#toolbar {
+				position: fixed;
+				top: 5px;
+				right: 5px;
+				box-shadow: 0px 5px 12px rgba(0,0,0,0.5);
+				border: outset;
+				background-color: gray;
+			}
+
+			#finishbtn {
+				width: 100%;
+				margin-top: 1em;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- The LRC editor was using crashed when I pressed the "save" button (after I had synced the whole song!)
+		     I got so angry that I made this. -->
+		<h1>LRC Creator</h1>
+		
+		<audio controls="controls" id="player"></audio>
+		<section id="stepone" style="display: block;">
+			<h2>Step 1/3: Upload your audio file</h2>
+			<form id="musicupload">
+				<input type="file" id="audiofile" required="required" accept="audio/*">
+				<input type="submit" value="Next">
+			</form>
+		</section>
+		<section id="steptwo">
+			<h2>Step 2/3: Write lyrics</h2>
+			<p>Write the lyrics into the box below. Remove instructions like [chorus] and (2x). Keep an empty line for any instrumental breaks (including one at the end of the song).</p>
+			<form id="lyricsform">
+				<textarea id="lyricinput" required="required"></textarea>
+				<input type="submit" value="Next" style="display: block">
+			</form>
+		</section>
+		<section id="stepthree">
+			<h2>Step 3/3: Timing</h2>
+			<p>When you're ready, start playing the track. Click <q>sync</q> or press <kbd>j</kbd> when the highlighted lyric starts. For empty lines, click it when the lyric ends. Try to sync the lyric just before, instead of as, it is sung.</p>
+			<div id="toolbar"><button id="prevbtn">Previous <kbd>[H]</kbd></button><button id="nextbtn">Next <kbd>[K]</kbd></button> <button id="syncbtn">Sync <kbd>[J]</kbd></button> <button id="playbtn">Play/Pause <kbd>[P]</kbd></button></div>
+			<div id="lyricscontainer"></div>
+			<button id="finishbtn">Finish</button>
+		</section>
+		<section id="finalstep">
+			<h2>Optional: Metadata</h2>
+			<form id="meta">
+				<label>Artist: <input class="metafield" name="ar"></label>
+				<label>Album: <input class="metafield" name="al"></label>
+				<label>Title: <input class="metafield" name="ti"></label>
+				<label>Songwriter: <input class="metafield" name="au"></label>
+				<input type="submit" value="Apply">
+			</form>
+			<hr>
+			<p>Download your completed LRC file below.</p>
+			<textarea readonly="readonly" id="output"></textarea>
+			<label><button id="download">Download</button></label>
+		</section>
+		<script>
+			var player = document.getElementById('player'),
+			    lyricscontainer = document.getElementById('lyricscontainer'),
+			    ldiv, finishedlrc;
+
+			function handleedit(e) {
+				e.stopPropagation();
+				console.log(e);
+				switch (e.keyCode) {
+				case 13: // enter
+					e.preventDefault();
+					ldiv = lyricdiv('');
+					lyricscontainer.insertBefore(ldiv, this.parentNode.nextSibling);
+					ldiv.childNodes[1].focus();
+					break;
+				case 8: // backspace
+				case 46: // delete
+					if (!this.childNodes[0] || !this.childNodes[0].nodeValue.length) {
+						if (this.parentNode.className === 'currentlyric')
+							(this.parentNode.nextSibling || this.parentNode.previousSibling).className = 'currentlyric';
+						this.parentNode[e.keyCode === 46 ? 'nextSibling' : 'previousSibling'].childNodes[1].focus();
+						lyricscontainer.removeChild(this.parentNode);
+					}
+					break;
+				}
+			}
+
+			function lyricdiv(line, iscur) {
+				var div = document.createElement('div'),
+				    span = document.createElement('span'),
+				    match = /^\[\d{2,}:[0-5]\d\.\d{2}\]/.exec(line);
+
+				span.appendChild(document.createTextNode(match ? match[0] : ''));
+				div.appendChild(span);
+				span = document.createElement('span');
+				span.appendChild(document.createTextNode(match ? line.substring(match[0].length) : line));
+				span.contentEditable = true;
+				span.onkeydown = handleedit;
+				div.appendChild(span);
+				if (iscur)
+					div.className = 'currentlyric';
+				return div;
+			}
+
+			function formattime(time) {
+				function naïvepad(text, len) {
+					return text.toString().length < len ? '0' + text : text;
+				}
+
+				return naïvepad(Math.floor(time / 60), 2) + ':' + naïvepad((time % 60).toFixed(2), 5);
+			}
+
+			function writelrc() {
+				var output = document.getElementById('output'),
+				    metafields = document.getElementsByClassName('metafield'),
+				    i;
+
+				output.value = '[length:' + formattime(player.duration) + ']\n';
+
+				for (i = 0; i < metafields.length; ++i)
+					if (metafields[i].value)
+						output.value += '[' + metafields[i].name + ':' + metafields[i].value + ']\n';
+
+				output.value += '\n' + finishedlrc;
+			}
+
+			function next() {
+				var cur = document.getElementsByClassName('currentlyric')[0];
+				if (cur && cur.nextSibling) {
+					cur.className = '';
+					cur.nextSibling.className = 'currentlyric';
+
+					cur.nextSibling.scrollIntoView(false);
+					scrollTo(0, window.scrollY+100);
+				}
+			}
+
+			function prev() {
+				var cur = document.getElementsByClassName('currentlyric')[0];
+				if (cur && cur.previousSibling) {
+					cur.className = '';
+					cur.previousSibling.className = 'currentlyric';
+				}
+			}
+
+			function sync() {
+				var cur = document.getElementsByClassName('currentlyric')[0];
+
+				if (cur) {
+					cur.childNodes[0].childNodes[0].nodeValue = '[' + formattime(player.currentTime) + ']';
+					next();
+				}
+			}
+
+			function play() {
+				if (document.getElementById('stepthree').style.display === 'block')
+					player[player.paused ? 'play' : 'pause']();
+			}
+
+			document.getElementById('prevbtn').onclick = prev;
+			document.getElementById('syncbtn').onclick = sync;
+			document.getElementById('nextbtn').onclick = next;
+			document.getElementById('playbtn').onclick = play;
+
+			document.getElementById('musicupload').onsubmit = function (e) {
+				e.preventDefault();
+				player.src = URL.createObjectURL(document.getElementById('audiofile').files[0]);
+			};
+
+			player.onloadedmetadata = function () {
+				this.style.display = 'block';
+				document.getElementById('stepone').style.display = 'none';
+				document.getElementById('steptwo').style.display = 'block';
+			};
+
+			player.onerror = function () {
+				alert('An error occured while loading the audio file. Its format may not be supported by your browser.');
+			};
+
+			document.getElementById('lyricsform').onsubmit = function (e) {
+				var lines = document.getElementById('lyricinput').value.split('\n'),
+				    i;
+
+				e.preventDefault();
+				document.getElementById('steptwo').style.display = 'none';
+				document.getElementById('stepthree').style.display = 'block';
+				
+				for (i = 0; i < lines.length; ++i)
+					lyricscontainer.appendChild(lyricdiv(lines[i], !i));
+			};
+
+			document.onkeydown = function (e) {
+				switch (e.keyCode) {
+				case 72: // H
+					prev();
+					break;
+				case 74: // J
+					sync();
+					break;
+				case 75: // K
+					next();
+					break;
+				case 80: // P
+					play();
+					break;
+				}
+			};
+
+			document.getElementById('finishbtn').onclick = function () {
+				var i;
+				finishedlrc = '';
+				for (i = 0; i < lyricscontainer.childNodes.length; ++i)
+					finishedlrc += lyricscontainer.childNodes[i].textContent + '\n';
+
+				writelrc();
+				
+				document.getElementById('stepthree').style.display = 'none';
+				document.getElementById('finalstep').style.display = 'block';
+
+			};
+
+			document.getElementById('meta').onsubmit = function (e) {
+				e.preventDefault();
+				writelrc();
+			};
+
+			document.getElementById('download').onclick = function () {
+				var a = document.createElement('a'),
+				    filename = document.getElementById('audiofile').files[0].name || 'lyric.lrc',
+				    dotindex = filename.lastIndexOf('.');
+
+				a.href = URL.createObjectURL(new Blob([document.getElementById('output').value], {type: 'text/x-lrc', endings: 'native'}));
+				a.download = filename.substring(0, dotindex === -1 ? Infinity : dotindex) + '.lrc';
+				document.body.appendChild(a);
+				a.click();
+				document.body.removeChild(a);
+				URL.revokeObjectURL(a.href);
+			};
+
+			document.body.removeChild(document.getElementById('jsplea'));
+			document.getElementById('stepone').style.display = 'block';
+		</script>
+	
+
+</body></html>

@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 import lib.Median;
 
-public class Rep {
+public class Main {
     static void Oneto100() {
         int myint=1;
         while (myint<=100) {
