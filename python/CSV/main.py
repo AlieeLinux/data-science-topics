@@ -11,9 +11,9 @@ data = [
 ]
 
 data = pd.DataFrame(data=data).transpose()
-data.columns = ["Dick", "Pennises"]
+data.columns = ["Index1", "Index2"]
 
-data.at[1, 'Pennises'] = 69
+data.at[4, 'Index2'] = 69
 
 data.to_csv("jdasd.csv")
 
