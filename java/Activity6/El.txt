@@ -1,0 +1,18 @@
+activities for today
+
+output:
+
+
+1st number : 6
+2nd  num :   3
+
+The sum is : 9
+the difference  is: 3
+The product is: 18
+The qoutient is: 2
+
+try again? Y/N 
+
+if Y then it will execute once again if N it will terminate/end tbe program. 
+
+Using an array, display numbers 1-100.
